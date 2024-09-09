@@ -21,7 +21,7 @@ partitions are considered for the home server
 setup.
 
 | Partition | Mount point | Partition type | Size |
-| --------- | ------------ | -------------- |
+| --------- | ------------ | -------------- | --- |
 | '/dev/sda1' | subvolume(s) | btrfs | 931.5 GB |
 | '/dev/sdb1' | '/boot' | EFI system partition | 1.0 GB |
 | '/dev/sdb2' | subvolume(s) | btrfs | 221.5 GB |
