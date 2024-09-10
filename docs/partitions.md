@@ -39,3 +39,28 @@ fdisk /dev/sda
 ```
 Create all partitions as described above and do the same
 for `/dev/sdb` and `/dev/sdc`.
+
+With the partitions in place, we can now format them to
+the desired type.
+
+```
+mkfs.btrfs -L "root" /dev/sda1
+mkfs.fat -F 32 -L "efi" /dev/sdb1
+mkfs.btrfs -L "storage" /dev/sdb2
+mkfs.btrfs -L "backup" /dev/sdc1
+```
+
+> [!TIP]
+> You can also create the partition on `/dev/sdc` later, if the drive vontains already data you have backed-up.
+
+Finally, it is time to mount the new generated partitions.
+
+```
+mount --mkdir -o rw,noatime,compress=zstd:3 /dev/sda1 /mnt/storage
+mount --mkdir /dev/sdb1 /mnt/boot
+mount --mkdir -o rw,noatime,compress=zstd:3 /dev/sdb2 /mnt
+mount --mkdir -o rw,noatime,compress=zstd:3 /dev/sdc3 /mnt/backup
+```
+
+> [!TIP]
+> Mount the device using `mount --mkdir` will automatically create the directory.
